@@ -1,8 +1,42 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Callback, Context, Handler } from 'aws-lambda';
+import { ConfigService } from '@nestjs/config';
+
+const serverlessExpress = require('@vendia/serverless-express');
+
+let server: Handler;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+  const configService = app.get(ConfigService);
+
+  app.setGlobalPrefix('api'); 
+
+  const currentStage = configService.get<string>('STAGE') || 'dev';
+  const config = new DocumentBuilder()
+    .setTitle(configService.get<string>('SWAGGER_TITLE') || 'Sinapsis API')
+    .setDescription(configService.get<string>('SWAGGER_DESCRIPTION') || 'Docs')
+    .setVersion(configService.get<string>('SWAGGER_VERSION') || '1.0')
+    .addServer(`/${currentStage}`)
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  const swaggerPath = configService.get<string>('SWAGGER_PATH') || 'api/docs';
+  SwaggerModule.setup(swaggerPath, app, document);
+
+  await app.init();
+
+  const expressApp = app.getHttpAdapter().getInstance();
+  return serverlessExpress({ app: expressApp });
 }
-bootstrap();
+
+export const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
+  server = server ?? (await bootstrap());
+  return server(event, context, callback);
+};
