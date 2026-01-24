@@ -28,4 +28,13 @@ export class Campaign {
   // Relación: Una campaña tiene muchos mensajes
   @OneToMany(() => Message, (message) => message.campaign)
   messages: Message[];
+
+  static create(name: string, scheduledAt: Date, userId: number): Campaign {
+    const campaign = new Campaign();
+    campaign.name = name;
+    campaign.scheduledAt = scheduledAt;
+    campaign.userId = userId;
+    campaign.status = Status.ACTIVE;
+    return campaign;
+  }
 }
