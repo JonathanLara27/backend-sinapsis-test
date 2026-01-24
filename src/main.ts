@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Callback, Context, Handler } from 'aws-lambda';
 import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
 
 const serverlessExpress = require('@vendia/serverless-express');
 
@@ -13,6 +14,12 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.setGlobalPrefix('api'); 
+
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  }));
 
   const currentStage = configService.get<string>('STAGE') || 'dev';
   const config = new DocumentBuilder()
