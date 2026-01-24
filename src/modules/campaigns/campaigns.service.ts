@@ -3,8 +3,6 @@ import { DataSource, EntityManager } from 'typeorm';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { Campaign } from '../../entities/campaign.entity';
 import { Message } from '../../entities/message.entity';
-import { Status } from '../../common/enums/status.enum';
-import { ShippingStatus } from 'src/common/enums/shippingStatus.enum';
 
 @Injectable()
 export class CampaignsService {
