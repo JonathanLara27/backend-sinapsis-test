@@ -27,4 +27,13 @@ export class Message {
 
   @Column({ name: 'idCampania' })
   campaignId: number;
+
+  static create(text: string, campaign: Campaign): Message {
+    const message = new Message();
+    message.text = text;
+    message.shippingStatus = ShippingStatus.PENDING;
+    message.campaign = campaign;
+    message.status = Status.ACTIVE;
+    return message;
+  }
 }
