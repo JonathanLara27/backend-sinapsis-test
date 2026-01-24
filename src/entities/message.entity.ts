@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Campaign } from './campaign.entity';
-import { ShippingStatus } from 'src/common/enums/shippingStatus.enum';
-import { Status } from 'src/common/enums/status.enum';
+import { ShippingStatus } from '../common/enums/shippingStatus.enum';
+import { Status } from '../common/enums/status.enum';
 
 @Entity('mensaje')
 export class Message {

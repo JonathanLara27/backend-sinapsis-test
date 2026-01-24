@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Client } from './client.entity';
 import { Campaign } from './campaign.entity';
-import { Status } from 'src/common/enums/status.enum';
+import { Status } from '../common/enums/status.enum';
 
 @Entity('usuario')
 export class User {
