@@ -1,98 +1,154 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🚀 Backend Sinapsis Test - Marketing Campaigns API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API RESTful para la gestión y programación de campañas de marketing masivas, desarrollada con **NestJS** y arquitectura Serverless.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![TypeORM](https://img.shields.io/badge/TypeORM-FE0C05?style=for-the-badge&logo=typeorm&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
-## Description
+## 📋 Características Principales
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Arquitectura Hexagonal / Modular:** Código desacoplado y escalable.
+- **Transacciones ACID:** Garantía de integridad de datos al crear campañas y mensajes (Rollback automático ante fallos).
+- **Validación Estricta:** Uso de DTOs, `class-validator` y `ValidationPipe` global.
+- **QueryBuilder Optimizado:** Consultas SQL eficientes para reportes de dashboard, evitando sobrecarga en memoria.
+- **Unit Testing:** Cobertura de pruebas con Jest para Servicios y DTOs (incluyendo Mocks de BD y QueryBuilder).
+- **Documentación:** Swagger OpenAPI integrado y automatizado.
 
-## Project setup
+---
 
+## 🛠️ Requisitos Previos
+
+- Node.js (v18+)
+- Docker & Docker Compose
+- pnpm (`npm install -g pnpm`)
+
+---
+
+## 🚀 Instalación y Despliegue Local
+
+### 1. Clonar el repositorio
 ```bash
-$ pnpm install
+git clone https://github.com/JonathanLara27/backend-sinapsis-test
+cd backend-sinapsis-test
+
 ```
 
-## Compile and run the project
+### 2. Instalar dependencias
 
 ```bash
-# development
-$ pnpm run start
+pnpm install
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
 ```
 
-## Run tests
+### 3. Levantar Base de Datos (Docker)
+
+El proyecto incluye un `docker-compose.yml` configurado con MySQL 8.
 
 ```bash
-# unit tests
-$ pnpm run test
+docker-compose up -d
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
 ```
 
-## Deployment
+*El contenedor expondrá el puerto `3307` para evitar conflictos con instalaciones locales de MySQL.*
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 4. Ejecutar la aplicación (Modo Offline/Local)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Usamos `serverless-offline` para simular el entorno Lambda localmente.
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+npm run build
+npx serverless offline
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+La API estará disponible en: `http://localhost:3000/dev`
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📚 Documentación API (Swagger)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Una vez levantada la aplicación, accede a la documentación interactiva:
 
-## Support
+👉 **http://localhost:3000/dev/api/docs**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Endpoints Clave
 
-## Stay in touch
+| Método | Endpoint | Descripción |
+| --- | --- | --- |
+| `POST` | `/campaigns` | Crea una campaña y sus mensajes de forma transaccional. Requiere nombre, fecha y lista de mensajes. |
+| `GET` | `/reports/dashboard` | Reporte de mensajes agrupados por estado. Filtros: `month` (obligatorio), `clientId` (opcional). |
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🧪 Testing
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+El proyecto cuenta con pruebas unitarias robustas que cubren casos de éxito, errores y validaciones.
+
+```bash
+# Ejecutar todos los tests
+npm run test
+
+# Ver cobertura (Coverage)
+npm run test:cov
+
+```
+
+---
+
+## 🏛️ Decisiones de Diseño y Arquitectura
+
+1. **Patrón Repository & QueryBuilder:** Se utilizó `QueryBuilder` en el módulo de reportes para delegar la carga de procesamiento (agrupación y conteo) al motor de base de datos, optimizando el rendimiento frente a grandes volúmenes de datos.
+2. **Transacciones Manuales (`QueryRunner`):** Para el endpoint de creación de campañas, se optó por una transacción manual controlada. Esto asegura la atomicidad: no se crean campañas sin mensajes, ni mensajes huérfanos.
+3. **Principios SOLID:**
+* **SRP:** Separación estricta entre lógica de negocio (Service), validación de entrada (DTO) y definición de datos (Entity).
+* **DIP:** Inyección de dependencias en constructores para facilitar el testing y desacoplar componentes.
+
+
+
+---
+
+## ☁️ Estrategia de Despliegue (AWS)
+
+Para llevar este proyecto a un entorno productivo en AWS utilizando Serverless Framework, se deben considerar las siguientes configuraciones de infraestructura:
+
+1. **Infraestructura de Datos (Amazon RDS):**
+* Provisionar una instancia **Amazon RDS (MySQL)** o Aurora Serverless.
+* Configurar los Security Groups para permitir tráfico entrante en el puerto `3306` exclusivamente desde la VPC de las Lambdas.
+
+
+2. **Configuración de Red (`serverless.ts`):**
+* Configurar la sección `vpc` definiendo `subnetIds` (privadas) y `securityGroupIds`. Esto es obligatorio para que la Lambda pueda "ver" a la base de datos RDS.
+
+
+3. **Gestión de Secretos (AWS SSM):**
+* No utilizar archivos `.env` en producción. Se deben mapear las variables de entorno (`DB_HOST`, `DB_PASSWORD`, etc.) utilizando **AWS Systems Manager (Parameter Store)**.
+
+
+```yaml
+environment:
+  DB_HOST: ${ssm:/sinapsis/prod/DB_HOST}
+
+```
+
+
+4. **Despliegue:**
+```bash
+# Configurar credenciales IAM
+serverless config credentials --provider aws --key <KEY> --secret <SECRET>
+
+# Desplegar a stage de producción
+serverless deploy --stage prod
+
+```
+
+
+
+---
+
+## 👤 Autor
+
+Desarrollado por **Jonathan Lara**.
