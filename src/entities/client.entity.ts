@@ -15,4 +15,14 @@ export class Client {
 
   @OneToMany(() => User, (user) => user.client)
   users: User[];
+
+  //se pudo agregar CreateDateColumn y UpdateDateColumn, pero no estaba dentro del requerimiento.
+  //Recomiendo usar esto en todas las entidades, para mantener un registro de cuando se crean y actualizan los registros.
+
+  static create(name: string): Client {
+    const client = new Client();
+    client.name = name;
+    client.status = Status.ACTIVE;
+    return client;
+  }
 }
