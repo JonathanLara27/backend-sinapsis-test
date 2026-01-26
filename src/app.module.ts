@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReportsModule } from './modules/reports/reports.module';
 import { CampaignsModule } from './modules/campaigns/campaigns.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -29,6 +30,8 @@ import { CampaignsModule } from './modules/campaigns/campaigns.module';
     ReportsModule,
     
     CampaignsModule,
+    
+    UsersModule,
   ],
   controllers: [],
   providers: [],
