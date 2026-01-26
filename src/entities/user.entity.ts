@@ -25,4 +25,12 @@ export class User {
   // Relación: Un usuario crea muchas campañas
   @OneToMany(() => Campaign, (campaign) => campaign.user)
   campaigns: Campaign[];
+
+  static create(username: string, clientId: number): User {
+    const user = new User();
+    user.username = username;
+    user.clientId = clientId;
+    user.status = Status.ACTIVE;
+    return user;
+  }
 }
