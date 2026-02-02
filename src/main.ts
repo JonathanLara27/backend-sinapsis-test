@@ -7,19 +7,21 @@ import { ValidationPipe } from '@nestjs/common';
 
 const serverlessExpress = require('@vendia/serverless-express');
 
+// 🟢 Variable global para cachear el servidor (Evita el Cold Start en invocaciones seguidas)
 let server: Handler;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
-
   app.setGlobalPrefix('api'); 
-
+  
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
     forbidNonWhitelisted: true,
   }));
+  
+  app.enableCors();
+  const configService = app.get(ConfigService);
 
   const currentStage = configService.get<string>('STAGE') || 'dev';
   const config = new DocumentBuilder()
