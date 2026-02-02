@@ -22,9 +22,20 @@ API RESTful para la gestión y programación de campañas de marketing masivas, 
 
 ## 🛠️ Requisitos Previos
 
-- Node.js (v18+)
 - Docker & Docker Compose
-- pnpm (`npm install -g pnpm`)
+- Instalar [Bun](https://bun.sh/) (v1.0 o superior).
+
+## 🚀 Ejecución
+Este proyecto utiliza el runtime de Bun para desarrollo local.
+
+# Instalar dependencias
+bun install
+
+# Modo Desarrollo (NestJS Puro - Recomendado)
+bun run start:dev
+
+# Modo Serverless (Simulación AWS Lambda)
+bun run start:sls
 
 ---
 
