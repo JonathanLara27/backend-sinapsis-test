@@ -15,8 +15,9 @@ API RESTful para la gestión y programación de campañas de marketing masivas, 
 - **Transacciones ACID:** Garantía de integridad de datos al crear campañas y mensajes (Rollback automático ante fallos).
 - **Validación Estricta:** Uso de DTOs, `class-validator` y `ValidationPipe` global.
 - **QueryBuilder Optimizado:** Consultas SQL eficientes para reportes de dashboard, evitando sobrecarga en memoria.
-- **Unit Testing:** Cobertura de pruebas con Jest para Servicios y DTOs (incluyendo Mocks de BD y QueryBuilder).
 - **Documentación:** Swagger OpenAPI integrado y automatizado.
+- **Gestión de Usuarios y Clientes:** Módulos completos con CRUD, Paginación y Soft Delete.
+- **Testing Avanzado:** Cobertura de pruebas unitarias robustas con Jest para Servicios y DTOs. Incluye mocks de repositorios, simulación de transacciones (`QueryRunner`) y manejo de excepciones de base de datos (SQL Errors).
 
 ---
 
