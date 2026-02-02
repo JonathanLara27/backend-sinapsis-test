@@ -8,9 +8,13 @@ import { ClientsModule } from './modules/clients/clients.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    // 🟢 OPTIMIZACIÓN PARA BUN:
+    ConfigModule.forRoot({
+      ignoreEnvFile: true, // Bun ya carga el .env nativamente, evitamos doble trabajo
+      isGlobal: true,      // Para que ConfigService esté disponible en toda la app sin reimportar
+    }),
     
-    TypeOrmModule.forRootAsync({ // Usamos forRootAsync para inyectar ConfigService
+    TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
